@@ -6,12 +6,12 @@ import moe.brainlets.dorothybot.Command;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.handle.obj.IVoiceChannel;
 
-public class PlayAudioCommand implements Command {
+public class PlayAllAudioCommand implements Command {
 
 	@Override
 	public void run(MessageReceivedEvent event, List<String> arguments) {
 		if (arguments.isEmpty()) {
-			event.getChannel().sendMessage("Usage: /play <link>");
+			event.getChannel().sendMessage("Usage: /playall <playlist-link>");
 			return;
 		}
 
@@ -34,7 +34,7 @@ public class PlayAudioCommand implements Command {
 			manager.resume();
 		}
 
-		manager.getAudioPlayerManager().loadItemOrdered(manager.getAudioPlayer(), audioIdentifier, new LoadResultHandler(event, false));
+		manager.getAudioPlayerManager().loadItemOrdered(manager.getAudioPlayer(), audioIdentifier, new LoadResultHandler(event, true));
 	}
 
 }

@@ -25,6 +25,7 @@ public class EventListener {
 
 		// audio commands
 		commandMap.put("play", new PlayAudioCommand());
+		commandMap.put("playall", new PlayAllAudioCommand());
 		commandMap.put("stop", new StopAudioCommand());
 		commandMap.put("skip", new SkipAudioCommand());
 		commandMap.put("remove", new RemoveAudioCommand());
