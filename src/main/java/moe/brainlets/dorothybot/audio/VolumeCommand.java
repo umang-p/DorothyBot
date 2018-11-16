@@ -2,6 +2,7 @@ package moe.brainlets.dorothybot.audio;
 
 import java.util.List;
 
+import moe.brainlets.dorothybot.BotUtils;
 import moe.brainlets.dorothybot.Command;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
@@ -11,7 +12,7 @@ public class VolumeCommand implements Command {
 	public void run(MessageReceivedEvent event, List<String> arguments) {
 		if (arguments.size() != 1) {
 			event.getChannel()
-					.sendMessage("Usage: /volume <number>" + "\nVolume can be between 0 and 1000 (default: 100)");
+					.sendMessage("Usage: "+BotUtils.CMD_PREFIX+"volume <number>" + "\nVolume can be between 0 and 1000 (default: 100)");
 			return;
 		}
 
@@ -20,7 +21,7 @@ public class VolumeCommand implements Command {
 			volume = Integer.parseInt(arguments.get(0));
 		} catch (NumberFormatException e) {
 			event.getChannel()
-					.sendMessage("Usage: /volume <number>" + "\nVolume can be between 0 and 1000 (default: 100)");
+					.sendMessage("Usage: "+BotUtils.CMD_PREFIX+"volume <number>" + "\nVolume can be between 0 and 1000 (default: 100)");
 			return;
 		}
 

@@ -11,10 +11,13 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.util.RequestBuffer;
 
+/*
+ * Class used to handle events triggered by loading of audio tracks.
+ */
 public class LoadResultHandler implements AudioLoadResultHandler {
 	
 	private MessageReceivedEvent event;
-	private boolean playall;
+	private boolean playall; //true if playall command was used, false if play command was used
 	
 	public LoadResultHandler(MessageReceivedEvent event, boolean playall) {
 		this.event = event;
@@ -29,7 +32,11 @@ public class LoadResultHandler implements AudioLoadResultHandler {
 		else
 			event.getChannel().sendMessage("Added to queue: " + track.getInfo().title);
 	}
-
+	
+	/*
+	 * Executes when the audio source is a playlist. Adds a single track or the entire playlist to the audio
+	 * queue, depending on which command the user used.
+	 */
 	@Override
 	public void playlistLoaded(AudioPlaylist playlist) {
 		AudioManager manager = AudioManager.getInstance();

@@ -11,6 +11,7 @@ import moe.brainlets.dorothybot.gfl.DollsCommand;
 import moe.brainlets.dorothybot.gfl.EquipsCommand;
 import moe.brainlets.dorothybot.gfl.RecipesCommand;
 import moe.brainlets.dorothybot.jp.JishoCommand;
+import moe.brainlets.dorothybot.misc.LogoutCommand;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
@@ -44,25 +45,27 @@ public class EventListener {
 		commandMap.put("equips", new EquipsCommand());
 		commandMap.put("recipes", new RecipesCommand());
 
-		// jp
+		// jp commands
 		commandMap.put("jisho", new JishoCommand());
 	}
-
+	
+	/*
+	 * Called whenever the bot receives a message.
+	 */
 	@EventSubscriber
 	public void onMessageReceived(MessageReceivedEvent event) {
 		String message = event.getMessage().getContent();
 
-		if (!message.startsWith(Dorothy.CMD_PREFIX))
+		if (!message.startsWith(BotUtils.CMD_PREFIX))
 			return;
 
 		String[] args = message.split(" ");
 
-		String command = args[0].substring(Dorothy.CMD_PREFIX.length());
-
 		List<String> arguments = new ArrayList<>(Arrays.asList(args));
-		arguments.remove(0);
+		String command = arguments.remove(0); //remove the command itself from the full message
+		command = command.substring(BotUtils.CMD_PREFIX.length());
 
 		if (commandMap.containsKey(command))
-			commandMap.get(args[0].substring(Dorothy.CMD_PREFIX.length())).run(event, arguments);
+			commandMap.get(command).run(event, arguments);
 	}
 }

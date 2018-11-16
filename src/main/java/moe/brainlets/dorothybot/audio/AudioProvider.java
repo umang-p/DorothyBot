@@ -6,6 +6,9 @@ import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
 import sx.blah.discord.handle.audio.AudioEncodingType;
 import sx.blah.discord.handle.audio.IAudioProvider;
 
+/*
+ * Standard boilerplate class used by the D4J library to obtain audio from the lavaplayer library.
+ */
 public class AudioProvider implements IAudioProvider {
 	private AudioPlayer player;
 	private AudioFrame lastFrame;

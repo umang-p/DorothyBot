@@ -5,7 +5,6 @@ import sx.blah.discord.api.IDiscordClient;
 
 public class Dorothy {
 
-	static final String CMD_PREFIX = "/";
 
 	public static void main(String[] args) {
 		IDiscordClient bot = new ClientBuilder().withToken(TOKEN).build();

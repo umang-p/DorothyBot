@@ -15,6 +15,9 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 
+/*
+ * Class used to manage the audio queue and the audio player itself. Self-explanatory methods.
+ */
 public class AudioManager {
 
 	private static AudioManager audioScheduler = null;

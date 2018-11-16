@@ -12,13 +12,17 @@ import moe.brainlets.dorothybot.BotUtils;
 import moe.brainlets.dorothybot.Command;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
+/*
+ * Command used to determine which Tdolls can be obtained at what % rate from a given recipe,
+ * or which Tdolls can be crafted from a given timer. Data is sourced from GFDB.
+ */
 public class DollsCommand implements Command {
 
 	@Override
 	public void run(MessageReceivedEvent event, List<String> arguments) {
 		// non heavy doll recipes have min of 30 resources required, max of 999
 
-		String usage = "Usage: /dolls <time-or-recipe>\nTime format example: /dolls 00:50\nRecipe format example: \"/dolls 130/130/130/130\" or \"/dolls 6000/2000/6000/4000/1\" for heavy production where you add /1, /2, or /3 at the end to indicate production tier";
+		String usage = "Usage: "+BotUtils.CMD_PREFIX+"dolls <time-or-recipe>\nTime format example: \""+BotUtils.CMD_PREFIX+"dolls 00:50\"\nRecipe format example: \""+BotUtils.CMD_PREFIX+"dolls 130/130/130/130\" or \""+BotUtils.CMD_PREFIX+"dolls 6000/2000/6000/4000/1\" for heavy production where you add /1, /2, or /3 at the end to indicate production tier";
 		if (arguments.size() != 1) {
 			event.getChannel().sendMessage(usage);
 			return;

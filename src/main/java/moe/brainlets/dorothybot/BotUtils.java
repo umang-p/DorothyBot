@@ -7,11 +7,20 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
+/*
+ * Class containing utility functions that do not rely on state.
+ */
 public class BotUtils {
+	
+	public static final String CMD_PREFIX = "/";
+	
+	/*
+	 * Obtains a json string from a given url. 
+	 * Returns a JSONArray if nothing goes wrong, null otherwise.
+	 */
 	public static JSONArray getJSONArray(String url) {
 		StringBuilder response = new StringBuilder();
 		try {
@@ -27,10 +36,22 @@ public class BotUtils {
 			e.printStackTrace();
 			return null;
 		}
+		
+		JSONArray json;
+		try {
+			json = new JSONArray(response.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
+		}
 
-		return new JSONArray(response.toString());
+		return json;
 	}
 
+	/*
+	 * Obtains a json string from a given url. 
+	 * Returns a JSONObject if nothing goes wrong, null otherwise.
+	 */
 	public static JSONObject getJSONObject(String url) {
 		StringBuilder response = new StringBuilder();
 		try {
@@ -46,56 +67,15 @@ public class BotUtils {
 			e.printStackTrace();
 			return null;
 		}
-
-		return new JSONObject(response.toString());
-	}
-
-	public static String getMeaningMessage(Element tags, Element meaningWrapper) {
-		String message = "";
-
-		if (tags != null)
-			message += tags.ownText() + "\n";
-
-		Elements divider = meaningWrapper.getElementsByClass("meaning-definition-section_divider");
-		if (!divider.isEmpty())
-			message += divider.get(0).ownText();
-
-		Elements meaning = meaningWrapper.getElementsByClass("meaning-meaning");
-		if (!meaning.isEmpty())
-			message += meaning.get(0).ownText() + "\n";
-
-		if (meaningWrapper.getElementsByClass("sentence").isEmpty())
-			return message;
-
-		Elements japSection = meaningWrapper.getElementsByClass("japanese japanese_gothic clearfix");
-		Elements japWords = japSection.get(0).children();
-		String furigana = "";
-		String kanji = "";
-		for (Element word : japWords) {
-			if (word.className().equals("english"))
-				break;
-
-			Elements furi = word.getElementsByClass("furigana");
-			Elements unlinked = word.getElementsByClass("unlinked");
-
-			if (furi.isEmpty()) {
-				for (int i = 0; i < unlinked.get(0).text().length(); i++)
-					furigana += "  ";
-
-				kanji += unlinked.get(0).text();
-			} else {
-				furigana += furi.get(0).text();
-				kanji += unlinked.get(0).text();
-				for (int i = 0; i < Math.abs(unlinked.get(0).text().length() - furi.get(0).text().length()); i++)
-					kanji += "  ";
-			}
+		
+		JSONObject json;
+		try {
+			json = new JSONObject(response.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
 		}
-		message += furigana + "\n";
-		message += kanji + "\n";
 
-		Element english = meaningWrapper.getElementsByClass("english").get(0);
-		message += english.ownText() + "\n";
-
-		return message;
+		return json;
 	}
 }

@@ -15,9 +15,12 @@ import moe.brainlets.dorothybot.Command;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.util.RequestBuffer;
 
+/*
+ * Command used to find recipes, ordered by success chance, to craft a given Tdoll. Data is sourced from GFDB.
+ */
 public class RecipesCommand implements Command {
 	
-	Map<String, String> aliases;
+	Map<String, String> aliases; //to allow users to more easily search for Tdolls with hard to remember names
 	
 	public RecipesCommand() {
 		aliases = new HashMap<String,String>();
@@ -269,9 +272,11 @@ public class RecipesCommand implements Command {
 		aliases.put("zas21", "zastava m21");
 		
 		aliases.put("strawberry", "carcano m1891");
+		aliases.put("strawberry carcano", "carcano m1891");
 		aliases.put("red carcano", "carcano m1891");
 		
 		aliases.put("grape", "carcano m91/38");
+		aliases.put("grape carcano", "carcano m91/38");
 		aliases.put("purple carcano", "carcano m91/38");
 		
 		aliases.put("t80", "80type");
@@ -326,7 +331,7 @@ public class RecipesCommand implements Command {
 
 	@Override
 	public void run(MessageReceivedEvent event, List<String> arguments) {
-		String usage = "Usage: /recipes <dollname>\n";
+		String usage = "Usage: "+BotUtils.CMD_PREFIX+"recipes <dollname>\n";
 		if (arguments.isEmpty()) {
 			event.getChannel().sendMessage(usage);
 			return;

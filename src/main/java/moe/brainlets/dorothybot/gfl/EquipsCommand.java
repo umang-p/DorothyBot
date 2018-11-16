@@ -12,13 +12,17 @@ import moe.brainlets.dorothybot.BotUtils;
 import moe.brainlets.dorothybot.Command;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
+/*
+ * Command used to determine which equips can be obtained at what % rate from a given recipe,
+ * or which equips can be crafted from a given timer. Data is sourced from GFDB.
+ */
 public class EquipsCommand implements Command {
 
 	@Override
 	public void run(MessageReceivedEvent event, List<String> arguments) {
 		// equip recipes have min of 10 resources required, max of 300
 
-		String usage = "Usage: /equips <time-or-recipe>\nTime format (# of minutes) example: /equips 58\nRecipe format example: /equips 50/250/150/50";
+		String usage = "Usage: "+BotUtils.CMD_PREFIX+"equips <time-or-recipe>\nTime format (# of minutes) example: "+BotUtils.CMD_PREFIX+"equips 58\nRecipe format example: "+BotUtils.CMD_PREFIX+"equips 50/250/150/50";
 		if (arguments.size() != 1) {
 			event.getChannel().sendMessage(usage);
 			return;
