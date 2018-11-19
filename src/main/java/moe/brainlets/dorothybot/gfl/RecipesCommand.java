@@ -1,5 +1,8 @@
 package moe.brainlets.dorothybot.gfl;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -21,9 +24,26 @@ import sx.blah.discord.util.RequestBuffer;
 public class RecipesCommand implements Command {
 	
 	Map<String, String> aliases; //to allow users to more easily search for Tdolls with hard to remember names
+	JSONArray gunData;
 	
 	public RecipesCommand() {
 		aliases = new HashMap<String,String>();
+		
+		StringBuilder json = new StringBuilder();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/gun_info.json"));
+
+			String line;
+			while ((line = br.readLine()) != null)
+				json.append(line);
+
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		gunData = new JSONArray(json.toString());
+		
 		
 		aliases.put("cola", "m1873");
 		aliases.put("bepis", "m1873");
@@ -347,12 +367,6 @@ public class RecipesCommand implements Command {
 			query = aliases.get(dollname.toLowerCase());
 		else
 			query = dollname;
-		
-		JSONArray gunData = BotUtils.getJSONArray("https://ipick.baka.pw:444/data/json/gun_info");
-		if (gunData == null) {
-			event.getChannel().sendMessage("Error getting data from GFDB, it may be down");
-			return;
-		}
 		
 		int gunID = -1;
 		String en_name = "";

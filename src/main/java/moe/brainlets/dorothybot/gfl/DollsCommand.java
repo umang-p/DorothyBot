@@ -1,5 +1,8 @@
 package moe.brainlets.dorothybot.gfl;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,6 +20,25 @@ import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedE
  * or which Tdolls can be crafted from a given timer. Data is sourced from GFDB.
  */
 public class DollsCommand implements Command {
+	
+	JSONArray gunData;
+	
+	public DollsCommand() {
+		StringBuilder json = new StringBuilder();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/gun_info.json"));
+
+			String line;
+			while ((line = br.readLine()) != null)
+				json.append(line);
+
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		gunData = new JSONArray(json.toString());
+	}
 
 	@Override
 	public void run(MessageReceivedEvent event, List<String> arguments) {
@@ -71,12 +93,6 @@ public class DollsCommand implements Command {
 				chanceData.put(id, chance);
 			}
 
-			JSONArray gunData = BotUtils.getJSONArray("https://ipick.baka.pw:444/data/json/gun_info");
-			if (gunData == null) {
-				event.getChannel().sendMessage("Error getting data from GFDB, it may be down");
-				return;
-			}
-
 			List<String> dataLines = new ArrayList<String>();
 			for (int i = 0; i < gunData.length(); i++) {
 				int gunID = gunData.getJSONObject(i).getInt("id");
@@ -106,15 +122,9 @@ public class DollsCommand implements Command {
 			}
 			int development_time = timer * 60;
 
-			JSONArray jsonArray = BotUtils.getJSONArray("https://ipick.baka.pw:444/data/json/gun_info");
-			if (jsonArray == null) {
-				event.getChannel().sendMessage("Error getting data from GFDB, it may be down");
-				return;
-			}
-
 			String message = "Possible dolls:\n";
-			for (int i = 0; i < jsonArray.length(); i++) {
-				JSONObject gun = jsonArray.getJSONObject(i);
+			for (int i = 0; i < gunData.length(); i++) {
+				JSONObject gun = gunData.getJSONObject(i);
 				if (gun.getInt("develop_duration") == development_time && gun.getInt("id") < 1000) {
 					message += gun.getString("en_name") + "\n";
 				}

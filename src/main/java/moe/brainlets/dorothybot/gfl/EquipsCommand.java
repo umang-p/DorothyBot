@@ -1,5 +1,8 @@
 package moe.brainlets.dorothybot.gfl;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,6 +20,25 @@ import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedE
  * or which equips can be crafted from a given timer. Data is sourced from GFDB.
  */
 public class EquipsCommand implements Command {
+	
+	JSONArray equipData;
+	
+	public EquipsCommand() {
+		StringBuilder json = new StringBuilder();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/equip_info.json"));
+
+			String line;
+			while ((line = br.readLine()) != null)
+				json.append(line);
+
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		equipData = new JSONArray(json.toString());
+	}
 
 	@Override
 	public void run(MessageReceivedEvent event, List<String> arguments) {
@@ -69,12 +91,6 @@ public class EquipsCommand implements Command {
 				id = rollData.getJSONObject(i).getInt("equip_id");
 				chance = (double) rollData.getJSONObject(i).getInt("count") / total * 100;
 				chanceData.put(id, chance);
-			}
-
-			JSONArray equipData = BotUtils.getJSONArray("https://ipick.baka.pw:444/data/json/equip_info");
-			if (equipData == null) {
-				event.getChannel().sendMessage("Error getting data from GFDB, it may be down");
-				return;
 			}
 
 			List<String> dataLines = new ArrayList<String>();
@@ -153,16 +169,13 @@ public class EquipsCommand implements Command {
 			}
 			int development_time = timer * 60;
 
-			JSONArray equipInfo = BotUtils.getJSONArray("https://ipick.baka.pw:444/data/json/equip_info");
-			if (equipInfo == null) {
-				event.getChannel().sendMessage("Error getting data from GFDB, it may be down");
-				return;
-			}
-
 			String message = "Possible equips:\n";
-			for (int i = 0; i < equipInfo.length(); i++) {
-				JSONObject equip = equipInfo.getJSONObject(i);
-				if (equip.getInt("develop_duration") == development_time) {
+			for (int i = 0; i < equipData.length(); i++) {
+				JSONObject equip = equipData.getJSONObject(i);
+				if (equip.getInt("develop_duration") == development_time
+						&& equip.getString("fit_guns").equals("")
+						&& !equip.getString("cn_name").contains("16Lab")
+						&& !equip.getString("company").equals("")) {
 					switch (equip.getInt("type")) {
 					case 1:
 						message += equip.getInt("rank") + "\u2606" + " scope\n";
@@ -190,7 +203,7 @@ public class EquipsCommand implements Command {
 							message += " slug\n";
 						break;
 					case 8:
-						message += equip.getInt("rank") + "\u2606" + " HV ammo)\n";
+						message += equip.getInt("rank") + "\u2606" + " HV ammo\n";
 						break;
 					case 10:
 						message += equip.getInt("rank") + "\u2606";
@@ -212,7 +225,7 @@ public class EquipsCommand implements Command {
 						message += equip.getInt("rank") + "\u2606" + " cape\n";
 						break;
 					default:
-						message += "unknown/special type";
+						message += "unknown/special type\n";
 					}
 				}
 			}

@@ -11,6 +11,7 @@ import moe.brainlets.dorothybot.gfl.DollsCommand;
 import moe.brainlets.dorothybot.gfl.EquipsCommand;
 import moe.brainlets.dorothybot.gfl.RecipesCommand;
 import moe.brainlets.dorothybot.jp.JishoCommand;
+import moe.brainlets.dorothybot.misc.FetchGFLDataCommand;
 import moe.brainlets.dorothybot.misc.LogoutCommand;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
@@ -23,6 +24,7 @@ public class EventListener {
 		// general commands
 		commandMap.put("shutdown", new LogoutCommand());
 		commandMap.put("logout", new LogoutCommand());
+		commandMap.put("fetchgfldata", new FetchGFLDataCommand());
 
 		// audio commands
 		commandMap.put("play", new PlayAudioCommand());
