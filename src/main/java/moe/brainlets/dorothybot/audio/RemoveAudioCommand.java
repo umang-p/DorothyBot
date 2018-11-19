@@ -16,7 +16,7 @@ public class RemoveAudioCommand implements Command {
 	@Override
 	public void run(MessageReceivedEvent event, List<String> arguments) {
 		if (arguments.size() != 1) {
-			event.getChannel().sendMessage("Usage: "+BotUtils.CMD_PREFIX+"remove <number>");
+			event.getChannel().sendMessage("Usage: "+BotUtils.CMD_PREFIX+"remove <number-of-track-to-remove>\nUse the playlist command to find track numbers");
 			return;
 		}
 
