@@ -296,6 +296,7 @@ public class RecipesCommand implements Command {
 		aliases.put("red carcano", "carcano m1891");
 		
 		aliases.put("grape", "carcano m91/38");
+		aliases.put("grape juice", "carcano m91/38");
 		aliases.put("grape carcano", "carcano m91/38");
 		aliases.put("purple carcano", "carcano m91/38");
 		
@@ -359,8 +360,9 @@ public class RecipesCommand implements Command {
 		
 		String dollname = "";
 		for(String arg: arguments) {
-			dollname += arg;
+			dollname += arg + " ";
 		}
+		dollname = dollname.trim();
 		
 		String query;
 		if(aliases.containsKey(dollname.toLowerCase()))
