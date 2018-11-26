@@ -31,7 +31,7 @@ The project can be compiled and built as is, with the addition of your bot's tok
 
 
 
-#### gfl - Commands related to the GFL mobile game (All data is sourced from GFDB)
+#### gf - Commands related to the Girls' Frontline mobile game (All data is sourced from GFDB)
 
 `dolls` : Show which Tactical-dolls can be obtained from a given recipe or timer
 
@@ -50,4 +50,4 @@ The project can be compiled and built as is, with the addition of your bot's tok
 
 `help` : Shows help text
 
-`fetchgfldata` : Updates the JSON files used for gfl commands. Can only be used by the bot owner.
+`fetchgfdata` : Updates the JSON files used for gf commands. Can only be used by the bot owner.
