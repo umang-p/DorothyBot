@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import moe.brainlets.dorothybot.audio.*;
-import moe.brainlets.dorothybot.gfl.DollsCommand;
-import moe.brainlets.dorothybot.gfl.EquipsCommand;
-import moe.brainlets.dorothybot.gfl.RecipesCommand;
+import moe.brainlets.dorothybot.girlsfrontline.DollsCommand;
+import moe.brainlets.dorothybot.girlsfrontline.EquipsCommand;
+import moe.brainlets.dorothybot.girlsfrontline.RecipesCommand;
 import moe.brainlets.dorothybot.jp.JishoCommand;
-import moe.brainlets.dorothybot.misc.FetchGFLDataCommand;
+import moe.brainlets.dorothybot.misc.FetchGFDataCommand;
 import moe.brainlets.dorothybot.misc.HelpCommand;
 import moe.brainlets.dorothybot.misc.LogoutCommand;
 import sx.blah.discord.api.events.EventSubscriber;
@@ -25,7 +25,7 @@ public class EventListener {
 		// general commands
 		commandMap.put("shutdown", new LogoutCommand());
 		commandMap.put("logout", new LogoutCommand());
-		commandMap.put("fetchgfldata", new FetchGFLDataCommand());
+		commandMap.put("fetchgfdata", new FetchGFDataCommand());
 		commandMap.put("help", new HelpCommand());
 
 		// audio commands
@@ -44,7 +44,7 @@ public class EventListener {
 		commandMap.put("resume", new ResumeAudioCommand());
 		commandMap.put("volume", new VolumeCommand());
 
-		// gfl commands
+		// gf commands
 		commandMap.put("dolls", new DollsCommand());
 		commandMap.put("equips", new EquipsCommand());
 		commandMap.put("recipes", new RecipesCommand());

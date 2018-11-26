@@ -16,7 +16,7 @@ import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedE
 /*
  * Command used to fetch the latest data from GFDB and update the local JSON files.
  */
-public class FetchGFLDataCommand implements Command {
+public class FetchGFDataCommand implements Command {
 
 	@Override
 	public void run(MessageReceivedEvent event, List<String> arguments) {

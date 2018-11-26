@@ -1,4 +1,4 @@
-package moe.brainlets.dorothybot.gfl;
+package moe.brainlets.dorothybot.girlsfrontline;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

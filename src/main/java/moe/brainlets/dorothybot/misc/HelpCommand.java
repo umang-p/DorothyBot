@@ -11,7 +11,7 @@ public class HelpCommand implements Command {
 	@Override
 	public void run(MessageReceivedEvent event, List<String> arguments) {
 		if(arguments.isEmpty()) {
-			event.getChannel().sendMessage("For a list of commands, try "+BotUtils.CMD_PREFIX+"help <category>\nCategories:\naudio\ngfl\njp");
+			event.getChannel().sendMessage("For a list of commands, try "+BotUtils.CMD_PREFIX+"help <category>\nCategories:\naudio\ngf\njp");
 			return;
 		}
 		
@@ -26,7 +26,7 @@ public class HelpCommand implements Command {
 				+ "[play]: Start playing a track or add it to the queue if something is playing already. If the link provided is a playlist, only uses the selected track\n"
 				+ "[playall]: Same as [play] but if given a playlist link, all tracks in the playlist will be added to the queue\n";
 		
-		String gflHelp = "[dolls]: Show which Tdolls can be obtained from a given recipe or timer\n"
+		String gfHelp = "[dolls]: Show which Tdolls can be obtained from a given recipe or timer\n"
 				+ "[equips]: Show which equips can be obtained from a given recipe or timer\n"
 				+ "[recipes]: Show which recipes can be used to obtain a specific Tdoll\n";
 		
@@ -35,7 +35,7 @@ public class HelpCommand implements Command {
 		String category = arguments.get(0);
 		switch (category.toLowerCase()) {
 		case "audio": event.getChannel().sendMessage(audioHelp); break;
-		case "gfl": event.getChannel().sendMessage(gflHelp); break;
+		case "gf": event.getChannel().sendMessage(gfHelp); break;
 		case "jp": event.getChannel().sendMessage(jpHelp); break;
 		default: event.getChannel().sendMessage("Category does not exist");
 		}
