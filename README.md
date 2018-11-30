@@ -1,6 +1,6 @@
 # dorothybot - Multipurpose bot for Discord
 
-dorothybot is a simple discord bot designed for single shard use. Its current and planned features are designed purely on the needs of its current users. The code has primarily been made public as a means for others to learn from or provide similar functionalities in other applications.
+dorothybot is a simple discord bot designed for single shard use. Its current and planned features are designed purely on the needs of its current users. The code has primarily been made public as a means for others to learn from or provide similar functionalities in other applications. This project is licensed under GNU General Public License v3.
 
 ### Usage
 The project can be compiled and built as is, with the addition of your bot's token in `dorothy.java`. Dependencies include [LavaPlayer](https://github.com/sedmelluq/lavaplayer), [Discord4J](https://github.com/Discord4J/Discord4J), and [jsoup](https://jsoup.org/). See `pom.xml` for additional details.
@@ -31,7 +31,7 @@ The project can be compiled and built as is, with the addition of your bot's tok
 
 
 
-#### gf - Commands related to the Girls' Frontline mobile game (All data is sourced from GFDB)
+#### girlsfrontline - Commands related to the Girls' Frontline mobile game (All data is sourced from GFDB)
 
 `dolls` : Show which Tactical-dolls can be obtained from a given recipe or timer
 
