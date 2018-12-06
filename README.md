@@ -39,6 +39,8 @@ The project can be compiled and built as is, with the addition of your bot's tok
 
 `recipes` : Show which recipes can be used to obtain a specific Tactical-doll
 
+`timer` : Show the construction time for a specific Tactical-doll
+
 
 #### jp - Commands related to learning Japanese
 

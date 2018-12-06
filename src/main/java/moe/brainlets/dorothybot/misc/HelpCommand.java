@@ -28,7 +28,8 @@ public class HelpCommand implements Command {
 		
 		String gfHelp = "[dolls]: Show which Tdolls can be obtained from a given recipe or timer\n"
 				+ "[equips]: Show which equips can be obtained from a given recipe or timer\n"
-				+ "[recipes]: Show which recipes can be used to obtain a specific Tdoll\n";
+				+ "[recipes]: Show which recipes can be used to obtain a specific Tdoll\n"
+				+ "[timer]: Show the construction time for a specific Tdoll\n";
 		
 		String jpHelp = "[jisho]: Search a japanese dictionary\n";
 		

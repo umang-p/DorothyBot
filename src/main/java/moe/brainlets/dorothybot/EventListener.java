@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import moe.brainlets.dorothybot.audio.*;
+import moe.brainlets.dorothybot.girlsfrontline.DollTimerCommand;
 import moe.brainlets.dorothybot.girlsfrontline.DollsCommand;
 import moe.brainlets.dorothybot.girlsfrontline.EquipsCommand;
 import moe.brainlets.dorothybot.girlsfrontline.RecipesCommand;
@@ -48,6 +49,7 @@ public class EventListener {
 		commandMap.put("dolls", new DollsCommand());
 		commandMap.put("equips", new EquipsCommand());
 		commandMap.put("recipes", new RecipesCommand());
+		commandMap.put("timer", new DollTimerCommand());
 
 		// jp commands
 		commandMap.put("jisho", new JishoCommand());
