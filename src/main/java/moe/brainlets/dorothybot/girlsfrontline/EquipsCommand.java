@@ -174,8 +174,9 @@ public class EquipsCommand implements Command {
 				JSONObject equip = equipData.getJSONObject(i);
 				if (equip.getInt("develop_duration") == development_time
 						&& equip.getString("fit_guns").equals("")
-						&& !equip.getString("cn_name").contains("16Lab")
-						&& !equip.getString("company").equals("")) {
+						&& (!equip.getString("cn_name").contains("16Lab") && !equip.getString("cn_name").contains("16lab"))
+						&& !equip.getString("company").equals("")
+						&& equip.getInt("max_level") != 0) {
 					switch (equip.getInt("type")) {
 					case 1:
 						message += equip.getInt("rank") + "\u2606" + " scope\n";
