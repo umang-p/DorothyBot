@@ -176,7 +176,7 @@ public class EquipsCommand implements Command {
 						&& equip.getString("fit_guns").equals("")
 						&& (!equip.getString("cn_name").contains("16Lab") && !equip.getString("cn_name").contains("16lab"))
 						&& !equip.getString("company").equals("")
-						&& equip.getInt("max_level") != 0) {
+						&& (equip.getInt("max_level") != 0 || equip.getInt("rank") == 2)) {
 					switch (equip.getInt("type")) {
 					case 1:
 						message += equip.getInt("rank") + "\u2606" + " scope\n";
